@@ -9,15 +9,18 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node server.js",
     "start:dev": "cross-env NODE_ENV=development nodemon server.js",
-    "test": "cross-env NODE_ENV=test jest",
-    "test:watch": "cross-env NODE_ENV=test jest --watch"
+    "test": "cross-env NODE_ENV=test jest  --runInBand",
+    "test:watch": "cross-env NODE_ENV=test jest  --runInBand --watch"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "cross-env": "^5.2.0",
     "dotenv": "^7.0.0",
     "eslint": "^5.15.3",
     "eslint-plugin-prettier": "^3.0.1",
     "express": "^4.16.4",
+    "mongoose": "^5.4.20",
+    "morgan": "^1.9.1",
     "pg": "^7.9.0",
     "pg-hstore": "^2.3.2",
     "prettier": "^1.16.4",

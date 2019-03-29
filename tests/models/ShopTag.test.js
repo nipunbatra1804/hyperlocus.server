@@ -1,4 +1,4 @@
-const { Shop, Tag, sequelize } = require("../../models");
+const { Place, Tag, sequelize } = require("../../models");
 const createShops = require("./../seed/seedShopOptions");
 
 describe("Many To Many Association", () => {
@@ -12,9 +12,9 @@ describe("Many To Many Association", () => {
   const printMagicMethods = modelInstance => {
     console.log(Object.keys(modelInstance.__proto__));
   };
-  describe("Each Shop has many tags", () => {
+  describe("Each Place has many tags", () => {
     test("should get manytags for a sample restaurant", async () => {
-      const restaurant1 = await Shop.findOne({
+      const restaurant1 = await Place.findOne({
         where: { name: "Clarke Silly" }
       });
       printMagicMethods(restaurant1);
@@ -25,7 +25,7 @@ describe("Many To Many Association", () => {
     });
 
     test("should get manytags for another restaurant", async () => {
-      const restaurant1 = await Shop.findOne({
+      const restaurant1 = await Place.findOne({
         where: { name: "Googlie" }
       });
       printMagicMethods(restaurant1);
@@ -35,7 +35,7 @@ describe("Many To Many Association", () => {
       expect(tags).toEqual(expect.arrayContaining(["healthier", "japanese"]));
     });
     test("should add a foodoptions tags", async () => {
-      const restaurant1 = await Shop.findOne({
+      const restaurant1 = await Place.findOne({
         where: { name: "Googlie" }
       });
       const newTag = await Tag.create({
@@ -56,7 +56,7 @@ describe("Many To Many Association", () => {
         where: { name: "healthier" }
       });
       printMagicMethods(tag1);
-      let shopOptions = await tag1.getShops();
+      let shopOptions = await tag1.getPlaces();
       shopOptions = shopOptions.map(opt => opt.name);
       expect(shopOptions).toEqual(
         expect.arrayContaining(["ThoughtProvokes", "Googlie"])

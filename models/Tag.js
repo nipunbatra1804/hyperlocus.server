@@ -9,17 +9,8 @@ module.exports = (sequelize, type) => {
   );
 
   Tag.associate = models => {
-    Tag.belongsToMany(models.FoodOption, {
-      through: "food_tag",
-      foreignKey: "foodid"
-    });
-    Tag.belongsToMany(models.Shop, {
-      through: "shop_tag",
-      foreignKey: "shopid"
-    });
-    Tag.belongsToMany(models.Health, {
-      through: "health_tag",
-      foreignKey: "healthid"
+    Tag.belongsToMany(models.Place, {
+      through: "place_tag"
     });
   };
   return Tag;

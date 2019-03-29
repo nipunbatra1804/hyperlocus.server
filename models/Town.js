@@ -1,6 +1,6 @@
 module.exports = (sequelize, type) => {
-  const Town = sequelize.define(
-    "town",
+  const Estate = sequelize.define(
+    "estate",
     {
       id: { type: type.INTEGER, primaryKey: true, autoIncrement: true },
       name: type.STRING,
@@ -11,5 +11,5 @@ module.exports = (sequelize, type) => {
     { timestamps: false }
   );
 
-  return Town;
+  return Estate;
 };

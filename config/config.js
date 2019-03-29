@@ -4,7 +4,8 @@ module.exports = {
     password: "",
     database: "hyperlocus-db",
     options: {
-      dialect: "postgres"
+      dialect: "postgres",
+      logging: false
     }
   },
   test: {

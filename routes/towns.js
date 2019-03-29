@@ -1,11 +1,11 @@
 const express = require("express");
-const { Town } = require("../models");
+const { Estate } = require("../models");
 
 const router = express.Router();
 
 router.route("/").get(async (req, res) => {
   const { query } = req;
-  const towns = await Town.findAll({});
+  const towns = await Estate.findAll({});
   return res.json(towns);
 });
 

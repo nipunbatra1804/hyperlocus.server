@@ -1,4 +1,4 @@
-const { FoodOption, Tag, sequelize } = require("../../models");
+const { Place, Tag, sequelize } = require("../../models");
 const createFoodOptions = require("./../seed/seedFoodOptions");
 
 describe("Many To Many Association", () => {
@@ -14,7 +14,7 @@ describe("Many To Many Association", () => {
   };
   describe("Each Restaurant has many tags", () => {
     test("should get manytags for a sample restaurant", async () => {
-      const restaurant1 = await FoodOption.findOne({
+      const restaurant1 = await Place.findOne({
         where: { name: "Sushi Tei" }
       });
       printMagicMethods(restaurant1);
@@ -25,7 +25,7 @@ describe("Many To Many Association", () => {
     });
 
     test("should get manytags for another restaurant", async () => {
-      const restaurant1 = await FoodOption.findOne({
+      const restaurant1 = await Place.findOne({
         where: { name: "rice garden" }
       });
       printMagicMethods(restaurant1);
@@ -35,7 +35,7 @@ describe("Many To Many Association", () => {
       expect(tags).toEqual(expect.arrayContaining(["hawker", "cheap"]));
     });
     test("should add a foodoptions tags", async () => {
-      const restaurant1 = await FoodOption.findOne({
+      const restaurant1 = await Place.findOne({
         where: { name: "Sushi Tei" }
       });
       const newTag = await Tag.create({
@@ -56,7 +56,7 @@ describe("Many To Many Association", () => {
         where: { name: "healthier" }
       });
       printMagicMethods(tag1);
-      let foodOptions = await tag1.getFoodoptions();
+      let foodOptions = await tag1.getPlaces();
       foodOptions = foodOptions.map(opt => opt.name);
       expect(foodOptions).toEqual(
         expect.arrayContaining(["Sushi Tei", "subway"])

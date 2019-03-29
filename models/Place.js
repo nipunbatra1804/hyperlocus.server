@@ -1,8 +1,9 @@
 module.exports = (sequelize, type) => {
   const FoodOption = sequelize.define(
-    "foodoption",
+    "place",
     {
       id: { type: type.INTEGER, primaryKey: true, autoIncrement: true },
+      category: { type: type.ENUM, values: ["healthcare", "Food", "retail"] },
       name: type.STRING,
       type: type.STRING,
       postalCode: type.INTEGER,
@@ -16,7 +17,7 @@ module.exports = (sequelize, type) => {
 
   FoodOption.associate = models => {
     FoodOption.belongsToMany(models.Tag, {
-      through: "food_tag"
+      through: "place_tag"
     });
   };
   return FoodOption;

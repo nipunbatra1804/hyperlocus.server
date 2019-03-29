@@ -1,10 +1,11 @@
-const { Health, Tag } = require("../../models");
+const { Place, Tag } = require("../../models");
 const crs = { type: "name", properties: { name: "EPSG:4326" } };
 
+const createTags = require("../seed/seedTags");
+
 const createHealthOptions = async () => {
-  const tagGoodFood = await Tag.create({ name: "oncology" });
-  const tagHealthier = await Tag.create({ name: "pathology" });
-  await Health.create(
+  const tags = await createTags();
+  await Place.create(
     {
       name: "ChinaTown Clinic",
       type: "private hospital",
@@ -16,12 +17,11 @@ const createHealthOptions = async () => {
         type: "Point",
         coordinates: [103.820383057662, 1.25134813803727],
         crs: crs
-      },
-      tags: [{ name: "pediatrics" }]
+      }
     },
     { include: [Tag] }
-  ).then(rest => rest.addTags(tagGoodFood));
-  await Health.create(
+  ).then(rest => rest.addTags([tags.tagEmergency]));
+  await Place.create(
     {
       name: "Clarke Hospital",
       type: "hospital",
@@ -33,12 +33,11 @@ const createHealthOptions = async () => {
         type: "Point",
         coordinates: [103.826013282121, 1.28000483731102],
         crs: crs
-      },
-      tags: [{ name: "pharmacy" }, { name: "economical" }]
+      }
     },
     { include: [Tag] }
-  );
-  await Health.create(
+  ).then(rest => rest.addTags([tags.tagPharmacy, tags.tagCheap]));
+  await Place.create(
     {
       name: "ThoughtCares",
       type: "clinic",
@@ -54,9 +53,9 @@ const createHealthOptions = async () => {
       tags: [{ name: "emergency" }]
     },
     { include: [Tag] }
-  ).then(res => res.addTags([tagHealthier]));
+  ).then(res => res.addTags([tags.tagEmergency, tags.tagPathology]));
 
-  await Health.create(
+  await Place.create(
     {
       name: "Googlie",
       type: "clinic",

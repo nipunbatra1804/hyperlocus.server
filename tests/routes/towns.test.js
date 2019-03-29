@@ -36,6 +36,5 @@ describe("Towns", () => {
       done();
       //.expect(res => verifyTowns(res.body, expectedTowns), done);
     });
-
   });
 });

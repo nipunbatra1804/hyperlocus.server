@@ -14,11 +14,9 @@ if (env === "production") {
 }
 
 const models = {
-  Town: sequelize.import("./Town.js"),
+  Estate: sequelize.import("./Town.js"),
   Tag: sequelize.import("./Tag.js"),
-  FoodOption: sequelize.import("./FoodOption.js"),
-  Shop: sequelize.import("./Shop.js"),
-  Health: sequelize.import("./Health.js")
+  Place: sequelize.import("./Place.js")
 };
 
 Object.keys(models).forEach(key => {
