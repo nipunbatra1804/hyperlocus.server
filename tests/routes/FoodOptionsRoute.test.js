@@ -97,7 +97,7 @@ describe("/FoodOptions", () => {
     test("should add a rest with NO tags", async () => {
       const res = await request(app)
         .post("/places")
-        .send({ foodOption: dummyItem })
+        .send({ place: dummyItem })
         .expect(201);
 
       const newFoodOption = res.body;
@@ -109,7 +109,7 @@ describe("/FoodOptions", () => {
       dummyItem.tags = [{ name: "japanese" }, { name: "healthier" }];
       const res = await request(app)
         .post("/places")
-        .send({ foodOption: dummyItem })
+        .send({ place: dummyItem })
         .expect(201);
 
       const newFoodOption = res.body;

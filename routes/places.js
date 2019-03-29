@@ -48,11 +48,11 @@ router
   })
   .post(async (req, res) => {
     try {
-      const { foodOption } = req.body;
-      const { tags } = foodOption;
-      console.log(foodOption);
+      const { place } = req.body;
+      const { tags } = place;
+      console.log(place);
 
-      const newFoodOption = await Place.create(foodOption);
+      const newFoodOption = await Place.create(place);
       if (tags) {
         let newTags = [];
         await Promise.all(
