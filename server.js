@@ -11,6 +11,7 @@ const port = process.env.PORT;
 
 sequelize.sync({ force: true }).then(() => {
   createFoodOptions();
+  createShopOptions();
   app.listen(port, () => {
     if (process.env.NODE_ENV === "production") {
       console.log(`Server is running on Heroku with port number ${port}`);

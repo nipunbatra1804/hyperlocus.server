@@ -1,5 +1,5 @@
 module.exports = (sequelize, type) => {
-  const FoodOption = sequelize.define(
+  const Place = sequelize.define(
     "place",
     {
       id: { type: type.INTEGER, primaryKey: true, autoIncrement: true },
@@ -15,10 +15,10 @@ module.exports = (sequelize, type) => {
     { timestamps: false }
   );
 
-  FoodOption.associate = models => {
-    FoodOption.belongsToMany(models.Tag, {
+  Place.associate = models => {
+    Place.belongsToMany(models.Tag, {
       through: "place_tag"
     });
   };
-  return FoodOption;
+  return Place;
 };

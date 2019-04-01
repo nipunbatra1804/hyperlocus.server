@@ -3,7 +3,8 @@ const router = express.Router();
 //const Sequelize = require("");
 const { Place, Tag, sequelize } = require("../models");
 const SqOp = sequelize.Op;
-
+const insertLocation = require("../helpers/updateLocation");
+const verification = require("../middleware/verification");
 router
   .route("/")
   .get(async (req, res) => {
@@ -46,11 +47,12 @@ router
     }
     res.json(places);
   })
-  .post(async (req, res) => {
+  .post(verification, async (req, res) => {
     try {
+      console.log(req.body);
       const { place } = req.body;
       const { tags } = place;
-      console.log(place);
+      await insertLocation(place);
 
       const newFoodOption = await Place.create(place);
       if (tags) {
@@ -58,7 +60,7 @@ router
         await Promise.all(
           tags.map(async tag => {
             let [t, created] = await Tag.findOrCreate({
-              where: { name: tag.name }
+              where: { name: tag }
             });
             newTags.push(t);
           })
@@ -76,26 +78,54 @@ router
     }
   });
 
-router.route("/:id").patch(async (req, res) => {
-  const { tags } = req.body;
-  const newObject = req.body;
-  delete newObject.tags;
-  let newTags = [];
-  if (tags) {
-    await Promise.all(
-      tags.map(async tag => {
-        let [t, created] = await Tag.findOrCreate({
-          where: { name: tag }
-        });
-        newTags.push(t);
-      })
-    );
-  }
-  const foodOption = await Place.findOne({ where: { id: req.params.id } });
-  await foodOption.addTags(newTags);
-  const result = await foodOption.update(newObject);
+router
+  .route("/:id")
+  .get(async (req, res) => {
+    const { id } = req.params;
+    try {
+      const retFoodOption = await Place.findOne({
+        where: { id: id },
+        include: [Tag]
+      });
+      return res.status(200).json(retFoodOption);
+    } catch (err) {
+      return res.status(415).json("get request not in correct format");
+    }
+  })
+  .patch(verification, async (req, res) => {
+    try {
+      const { tags } = req.body;
+      console.log(req.body);
+      const newObject = req.body;
+      delete newObject.tags;
+      delete newObject.location;
+      if (newObject.address && newObject.postalCode) {
+        await insertLocation(newObject);
+      }
 
-  res.status(202).json(result);
-});
+      let newTags = [];
+      if (tags) {
+        await Promise.all(
+          tags.map(async tag => {
+            if (tag) {
+              let [t, created] = await Tag.findOrCreate({
+                where: { name: tag }
+              });
+              newTags.push(t);
+            }
+          })
+        );
+      }
+      const foodOption = await Place.findOne({ where: { id: req.params.id } });
+      await foodOption.setTags(newTags);
+      const result = await foodOption.update(newObject);
+
+      return res.status(202).json(result);
+    } catch (err) {
+      return res
+        .status(415)
+        .json("patch request not in correct format" + err.message);
+    }
+  });
 
 module.exports = router;

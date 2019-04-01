@@ -106,7 +106,7 @@ describe("/FoodOptions", () => {
     });
 
     test("should add a rest with tags", async done => {
-      dummyItem.tags = [{ name: "japanese" }, { name: "healthier" }];
+      dummyItem.tags = ["japanese", "healthier"];
       const res = await request(app)
         .post("/places")
         .send({ place: dummyItem })
