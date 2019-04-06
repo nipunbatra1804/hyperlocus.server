@@ -1,5 +1,10 @@
 const cors = require("cors");
-const whitelist = ["http://localhost:3000", "https://hyperloc-us.herokuapp.com/"];
+const whitelist = [
+  "http://localhost:3000",
+  "https://hyperloc-us.herokuapp.com/",
+  "https://hyperloc-us.herokuapp.com/explore",
+  "https://hyperlocus-server.herokuapp.com/"
+];
 
 const corsOptions = {
   origin(origin, callback) {
@@ -8,8 +13,8 @@ const corsOptions = {
     } else {
       callback(new Error("Not allowed by CORS"));
     }
-  },
-  credentials: true
+  }
 };
+//,credentials: true
 
 module.exports = cors(corsOptions);
