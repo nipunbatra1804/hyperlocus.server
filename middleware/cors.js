@@ -1,9 +1,9 @@
 const cors = require("cors");
 const whitelist = [
   "http://localhost:3000",
-  "https://hyperloc-us.herokuapp.com/",
+  "https://hyperloc-us.herokuapp.com",
   "https://hyperloc-us.herokuapp.com/explore",
-  "https://hyperlocus-server.herokuapp.com/"
+  "https://hyperlocus-server.herokuapp.com"
 ];
 
 const corsOptions = {
