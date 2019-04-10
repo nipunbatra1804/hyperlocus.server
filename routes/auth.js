@@ -55,7 +55,6 @@ router
   .get(async (req, res) => {
     try {
       const { username, password } = req.body;
-      console.log(username, password);
       const user = await userAuthenticate(username, password);
       if (user) {
         const secret = process.env.SECRET_KEY;

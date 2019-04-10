@@ -4,6 +4,16 @@ const config = require(__dirname + "/../config/config.js")[env];
 
 if (env === "production") {
   sequelize = new Sequelize(config.url, config.options);
+} else if (env === "production_aws") {
+  sequelize = new Sequelize(config.database, config.username, config.password, {
+    host: config.url,
+    dialect: "postgres",
+    dialectOptions: {
+      ssl: {
+        ssl: "Amazon RDS"
+      }
+    }
+  });
 } else {
   sequelize = new Sequelize(
     config.database,

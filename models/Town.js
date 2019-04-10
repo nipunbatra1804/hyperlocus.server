@@ -6,7 +6,7 @@ module.exports = (sequelize, type) => {
       name: type.STRING,
       type: type.STRING,
       medRent: type.INTEGER,
-      location: type.GEOMETRY("POINT")
+      location: type.GEOMETRY("POLYGON")
     },
     { timestamps: false }
   );

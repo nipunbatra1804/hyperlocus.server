@@ -49,7 +49,6 @@ router
   })
   .post(verification, async (req, res) => {
     try {
-      console.log(req.body);
       const { place } = req.body;
       const { tags } = place;
       await insertLocation(place);
@@ -95,7 +94,6 @@ router
   .patch(verification, async (req, res) => {
     try {
       const { tags } = req.body;
-      console.log(req.body);
       const newObject = req.body;
       delete newObject.tags;
       delete newObject.location;

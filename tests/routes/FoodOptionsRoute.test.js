@@ -88,7 +88,6 @@ describe("/FoodOptions", () => {
       let foodOptions = res.body;
       foodOptions = foodOptions.map(food => food.name);
 
-      console.log(foodOptions);
 
       done();
     });

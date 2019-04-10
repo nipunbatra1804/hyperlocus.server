@@ -21,7 +21,7 @@ describe("Towns", () => {
       { name: "BUONA VISTA", type: "1-RM", medRent: 2700 }
     ];
     const verifyTowns = (towns, expected) => {
-      console.log(towns);
+    
       towns.forEach((elem, index) => {
         expect(elem.town).toBe(expected[index].town);
         expect(elem.town).toBe(expected[index].town);
