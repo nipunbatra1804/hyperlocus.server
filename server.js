@@ -1,9 +1,6 @@
 const { sequelize } = require("./models");
-const createTowns = require("./tests/seed/seedTowns");
-const createHealthOptions = require("./tests/seed/seedHealthOptions");
 const createFoodOptions = require("./tests/seed/seedFoodOptions");
 const createShopOptions = require("./tests/seed/seedShopOptions");
-const seedTowns = require("./tests/seed/seedTowns");
 const seedNeighbourhoods = require("./tests/seed/seedNeighbourhoods");
 const app = require("./app");
 if (process.env.NODE_ENV !== "production") {
