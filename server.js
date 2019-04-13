@@ -1,6 +1,7 @@
 const { sequelize } = require("./models");
 const createFoodOptions = require("./tests/seed/seedFoodOptions");
 const createShopOptions = require("./tests/seed/seedShopOptions");
+const createHealth = require("./tests/seed/seedHealthOptions");
 const seedNeighbourhoods = require("./tests/seed/seedNeighbourhoods");
 const app = require("./app");
 if (process.env.NODE_ENV !== "production") {
@@ -11,6 +12,7 @@ const port = process.env.PORT;
 sequelize.sync({ force: true }).then(async () => {
   await createFoodOptions();
   await createShopOptions();
+  await createHealth();
   await seedNeighbourhoods();
   app.listen(port, () => {
     if (process.env.NODE_ENV === "production") {

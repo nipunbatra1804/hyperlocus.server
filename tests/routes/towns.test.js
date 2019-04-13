@@ -44,7 +44,7 @@ describe("Towns", () => {
     test("returns all towns", async () => {
       const res = await request(app)
         .get("/towns")
-        .query({
+        .send({
           location: { coordinates: [103.955419467871, 1.3214476908532] }
         })
         .expect(200);
