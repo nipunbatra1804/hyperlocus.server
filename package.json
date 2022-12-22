@@ -21,7 +21,7 @@
     "eslint": "^5.15.3",
     "eslint-plugin-prettier": "^3.0.1",
     "express": "^4.16.4",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.4.20",
     "morgan": "^1.9.1",
     "pg": "^7.9.0",
